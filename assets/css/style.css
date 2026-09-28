@@ -1,0 +1,36 @@
+		*{
+ margin : 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+
+body{
+	margin: 20px;
+	/*글자 20픽셀 띄워쓰기*/
+	font-family: san-serif;
+	/*폰트 패밀리 css 검색, 전체 폰트 결정됨*/
+	color: #FFA07A;
+	background-color: oldlace;
+	/*css 컬러 검색, 또는 #000000 등 색상 코드 가능*/
+}
+
+img {
+	width: 200px;
+	/*모든 이미지의 넓이를 200픽셀로 고정*/
+	display: block;
+	/*inline은 한줄에 붙여서, block은 한줄에 하나씩*/
+	margin-bottom: 20px;
+	/*이미지 밑에 20픽셀 마진*/
+}
+
+a{
+	color: forestgreen;
+}
+
+.fightingDog{
+	width: 230px;
+	/*인덱스에서 클래스 사용한 뒤 css에서 .클래스이름 사용하여 변형*/
+}
+
+@media screen and (max-width: 704px) {
+}
