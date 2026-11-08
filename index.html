@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이상헌 포트폴리오</title>
+    <style>
+        /* 기본 여백 및 폰트 설정 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* 좌측 사이드바 */
+        .sidebar { width: 250px; min-width: 250px; padding: 40px 30px; display: flex; flex-direction: column; border-right: 1px solid #eee; }
+        .sidebar h1 { font-size: 32px; font-weight: 500; margin-bottom: 60px; cursor: pointer; } 
+        .sidebar ul { list-style: none; }
+        
+        /* GNB 메뉴 디자인 */
+        .sidebar li { font-size: 20px; margin-bottom: 30px; cursor: pointer; color: #ccc; transition: color 0.3s; }
+        .sidebar li.active, .sidebar li:hover { color: #000; font-weight: bold; } 
+
+        .main-content { flex-grow: 1; padding: 40px; overflow-y: auto; position: relative; scroll-behavior: auto; }
+
+        /* 마름모 Back Button */
+        .back-button-container {
+            position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px;
+            border: 1px solid #000; transform: rotate(45deg); display: flex;
+            align-items: center; justify-content: center; cursor: pointer; z-index: 10; background-color: #fff;
+            transition: background-color 0.2s;
+        }
+        .back-button-container:hover { background-color: #f0f0f0; }
+        .back-button-text { transform: rotate(-45deg); font-size: 10px; text-align: center; line-height: 1.2; }
+
+        /* 페이지 전환용 CSS */
+        .page { display: none; } 
+        .page.active { display: block; } 
+
+        /* GNB1 (Home) 썸네일 그리드 */
+        .grid-container { column-count: 6; column-gap: 20px; padding-bottom: 80px; }
+        .thumbnail { break-inside: avoid; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .thumbnail p { font-size: 10px; line-height: 1.4; }
+        
+        .painting-thumb { background-color: #000; color: #fff; }
+        .painting-landscape { aspect-ratio: 1622 / 1303; } 
+        .painting-portrait { aspect-ratio: 1303 / 1622; } 
+        .detail-thumb { background-color: #fff; color: #000; border: 1px solid #ccc; aspect-ratio: 1 / 1; }
+
+        /* GNB2 (Digital Artworks) 그리드 */
+        .grid-container-digital { column-count: 4; column-gap: 20px; padding-bottom: 80px; }
+        .digital-thumb {
+            break-inside: avoid; margin-bottom: 20px; background-color: #000; color: #fff;
+            display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+            aspect-ratio: 1 / 1.414; 
+        }
+        .digital-thumb p { font-size: 10px; line-height: 1.4; }
+
+        /* GNB3 (About Artist) 텍스트 및 하이퍼링크 스타일 */
+        .about-content { max-width: 600px; padding-bottom: 100px; color: #000; }
+        .about-section { margin-bottom: 60px; }
+        .about-section h2 { font-size: 16px; margin-bottom: 20px; font-weight: bold; }
+        .about-list { list-style: none; font-size: 14px; line-height: 2.2; }
+        .about-list li { margin-bottom: 5px; display: flex; }
+        .about-list .title { width: 100px; font-weight: bold; flex-shrink: 0; }
+        
+        /* 하이퍼링크 디자인 */
+        .about-list a { color: #000; text-decoration: none; border-bottom: 1px solid transparent; transition: border-bottom 0.2s; }
+        .about-list a:hover { border-bottom: 1px solid #000; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h1 id="nav-header">HEADER</h1>
+        <nav>
+            <ul>
+                <li id="nav-gnb1" class="nav-item active">GNB1<br><span style="font-size:12px; font-weight:normal;">(Paintings)</span></li>
+                <li id="nav-gnb2" class="nav-item">GNB2<br><span style="font-size:12px; font-weight:normal;">(Digital Artworks)</span></li>
+                <li id="nav-gnb3" class="nav-item">GNB3<br><span style="font-size:12px; font-weight:normal;">(About Artist)</span></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <!-- Back Button -->
+        <div class="back-button-container" id="back-button"><div class="back-button-text">Back<br>Button</div></div>
+
+        <!-- 1. GNB1 (Home) 페이지 -->
+        <div id="page-home" class="page active">
+            <div class="grid-container">
+                <div class="thumbnail painting-thumb painting-portrait"><p>Paintings<br>(1303:1622)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-landscape"><p>Paintings<br>(1622:1303)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-portrait"><p>Paintings<br>(1303:1622)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-landscape"><p>Paintings<br>(1622:1303)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-portrait"><p>Paintings<br>(1303:1622)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-portrait"><p>Paintings<br>(1303:1622)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+
+                <div class="thumbnail painting-thumb painting-landscape"><p>Paintings<br>(1622:1303)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+                <div class="thumbnail detail-thumb"><p>Detail shots<br>(1:1)</p></div>
+            </div>
+        </div>
+
+        <!-- 2. GNB2 페이지 -->
+        <div id="page-digital" class="page">
+            <div class="grid-container-digital">
+                <!-- 디지털 썸네일 24개 배치 -->
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+                <div class="digital-thumb"><p>Digital Photo<br>(1:1.414)</p></div>
+            </div>
+        </div>
+
+        <!-- 3. GNB3 페이지 -->
+        <div id="page-about" class="page">
+            <div class="about-content">
+                
+                <!-- Artist CV -->
+                <div class="about-section">
+                    <h2>Artist CV</h2>
+                    <ul class="about-list">
+                        <li>
+                            <span class="title">이상헌</span>
+                            <div>Lee Sangheon</div>
+                        </li>
+                        <li>
+                            <span class="title">Education</span>
+                            <div>
+                                홍익대학교 조형대학 디자인컨버전스학부 학사<br>
+                                홍익대학교 미술대학 동양화과 학사
+                            </div>
+                        </li>
+                        <li>
+                            <span class="title">Web pages</span>
+                            <div>
+                                <a href="https://elhayan0420.github.io" target="_blank">leesangheon.com</a><br>
+                                <a href="https://www.instagram.com/leesangheon_art/" target="_blank">instagram.com/leesangheon_art</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Yearly Notes -->
+                <div class="about-section">
+                    <h2>Yearly Notes</h2>
+                    <ul class="about-list">
+                        <li><span class="title">2026</span> <div>(2026년 작가 노트 내용이 들어갈 자리)</div></li>
+                        <li><span class="title">2025</span> <div>(2025년 작가 노트 내용이 들어갈 자리)</div></li>
+                        <li><span class="title">2024</span> <div>(2024년 작가 노트 내용이 들어갈 자리)</div></li>
+                    </ul>
+                </div>
+
+                <!-- Exhibition Notes -->
+                <div class="about-section">
+                    <h2>Exhibition Notes</h2>
+                    <ul class="about-list">
+                        <li>
+                            <span class="title">2026</span>
+                            <div>
+                                0과 1 사이의 온기<br>
+                                truehood<br>
+                                동, 시대
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Awards -->
+                <div class="about-section">
+                    <h2>Awards</h2>
+                    <ul class="about-list">
+                        <li>
+                            <span class="title">2026</span>
+                            <div>
+                                제11회 서리풀 ART for Art 대상전 특선<br>
+                                제47회 대한민국창작미술대전 은상<br>
+                                제46회 국제현대미술대전 동상
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- 스크립트: 페이지 전환 및 Back Button (스크롤 위치 복원) -->
+    <script>
+        const navHeader = document.getElementById('nav-header');
+        const navItems = document.querySelectorAll('.nav-item');
+        const pages = document.querySelectorAll('.page');
+        const mainContent = document.querySelector('.main-content');
+        const backButton = document.getElementById('back-button');
+
+        let historyStack = []; // 이전 페이지와 스크롤 위치를 기억할 배열
+        let currentPageId = 'page-home'; // 처음 시작 페이지
+
+        function showPage(pageId, clickedNav, isBacking = false) {
+            // 뒤로가기가 아니며 다른 페이지로 이동하는 경우, 현재 상태를 역사(history)에 저장
+            if (!isBacking && currentPageId !== pageId) {
+                historyStack.push({
+                    id: currentPageId,
+                    scroll: mainContent.scrollTop
+                });
+            }
+
+            // 모든 페이지 숨기고 타겟 페이지만 표시
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            // 메뉴 활성화(굵은 글씨) 변경
+            navItems.forEach(item => item.classList.remove('active'));
+            if (clickedNav) {
+                clickedNav.classList.add('active');
+            } else {
+                // 특정 메뉴 요소가 없을 때(HEADER 클릭 등) id로 강제 지정
+                if(pageId === 'page-home') document.getElementById('nav-gnb1').classList.add('active');
+                if(pageId === 'page-digital') document.getElementById('nav-gnb2').classList.add('active');
+                if(pageId === 'page-about') document.getElementById('nav-gnb3').classList.add('active');
+            }
+
+            // 새로운 페이지 진입 시 스크롤을 맨 위로 (뒤로가기가 아닐 경우만)
+            if (!isBacking) {
+                mainContent.scrollTop = 0;
+            }
+
+            currentPageId = pageId;
+        }
+
+        // 각 메뉴 클릭 이벤트 연결
+        navHeader.addEventListener('click', () => showPage('page-home', null));
+        document.getElementById('nav-gnb1').addEventListener('click', function() { showPage('page-home', this); });
+        document.getElementById('nav-gnb2').addEventListener('click', function() { showPage('page-digital', this); });
+        document.getElementById('nav-gnb3').addEventListener('click', function() { showPage('page-about', this); });
+
+        // Back Button 클릭 이벤트
+        backButton.addEventListener('click', () => {
+            if (historyStack.length > 0) {
+                const prevState = historyStack.pop(); // 가장 최근 기록 꺼내기
+                
+                let prevNavElement = null;
+                if(prevState.id === 'page-home') prevNavElement = document.getElementById('nav-gnb1');
+                if(prevState.id === 'page-digital') prevNavElement = document.getElementById('nav-gnb2');
+                if(prevState.id === 'page-about') prevNavElement = document.getElementById('nav-gnb3');
+
+                // 이전 페이지로 전환 (뒤로가기 플래그 true)
+                showPage(prevState.id, prevNavElement, true);
+                
+                // 화면 렌더링이 끝난 직후 이전 스크롤 위치로 복원
+                requestAnimationFrame(() => {
+                    mainContent.scrollTop = prevState.scroll;
+                });
+            } else {
+                // 이전 기록이 없으면 알림 (옵션)
+                alert("이전 페이지가 없습니다.");
+            }
+        });
+    </script>
+</body>
+</html>
